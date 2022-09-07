@@ -1,0 +1,5 @@
+While both GUI and Command line folder and file navigation achieve similar things, their differences are important to mark. GUI, or Graphical User Interface, lends the user a visual representation of their files, such as a thumbnail
+of the contents, a logo or emblem of some kind that is unique to the program, or a representation of the type of file, like a piece of paper for a .txt file, or a manilla folder for a folder. The user can click on each file to open it
+or drag and drop to move the location of the file. Command line, however, is very different in its handling of files. Files are refered to by their names, without any sort of picture to represent them. They are catagorized using their
+location in each folder, called a path. These paths can be navigated by typing out the direct path, or by commands. These commands can come in all sorts of styles, some with more power than others. These commands can even edit or
+delete files. If the user knows exactly what they want to do with their files, this method can be much faster than GUI. Both have their special uses in how they carry about managing folders and files.
