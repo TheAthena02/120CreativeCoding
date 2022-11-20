@@ -1,0 +1,32 @@
+function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(220);
+  //hair
+  rect(150,190,100,100);
+  
+  //body
+  triangle(150,300,200,200,250,300);
+  
+  //head
+  circle(200,200,100);
+  
+  //more hair
+  line(200,150,250,200);
+  //eyebrows
+  line(220,190,240,190);
+  line(170,190,190,190);
+  //eyes
+  point(180,195);
+  point(230,195);
+  //mouth
+  line(180,230, 230, 225);
+  //name
+  textSize(10);
+  text('by Cora',260,270);
+  //title
+  textSize(40);
+  text('Portrait',140,50);
+}
