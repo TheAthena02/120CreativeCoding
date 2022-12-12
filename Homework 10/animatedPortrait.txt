@@ -1,0 +1,77 @@
+var xEyes = 180;
+var moveEyes; 
+
+
+var yBrows = 190;
+var moveBrows;
+var mouthStart =180;
+var moveMouth = 1;
+
+var textStart = 40;
+var textMove = 1;
+function setup() {
+  createCanvas(400, 400);
+  moveEyes = floor(random() * 0.1) + 1;
+  moveBrows = floor(random() * 0.1) + 1;
+}
+
+function draw() {
+  background(220);
+  //hair
+  rect(150,190,100,100);
+  
+  //body
+  triangle(150,300,200,200,250,300);
+  
+  //head
+  circle(200,200,100);
+  
+  //more hair
+  line(200,150,250,200);
+  //eyebrows
+  
+  line(220,yBrows,240,yBrows);
+  line(170,yBrows,190,yBrows);
+  
+  if(yBrows <= 180 || yBrows >= 190)
+    {
+       moveBrows *= -1;
+    }
+
+     yBrows += moveBrows;
+  
+  //eyes
+  point(xEyes,195);
+  point(xEyes + 50,195);
+  
+  
+  if(xEyes >= 190 || xEyes <= 170)
+    {
+       moveEyes *= -1;
+    }
+
+     xEyes += moveEyes;
+  
+  
+  
+  //mouth
+  line(mouthStart,mouthStart + 50, mouthStart + 50, mouthStart + 45);
+  
+  if(mouthStart >= 185 || mouthStart <= 175)
+    {
+       moveMouth *= -1;
+    }
+
+     mouthStart += moveMouth;
+  //name
+  textSize(10);
+  text('by Cora',260,270);
+  //title
+  if(textStart >= 50 || textStart <= 10)
+    {
+       textMove *= -1;
+    }
+
+     textStart += textMove;
+  textSize(textStart);
+  text('Portrait',140,50);
