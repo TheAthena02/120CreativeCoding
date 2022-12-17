@@ -1,0 +1,92 @@
+var x = 50;
+var y = 50;
+var x1 = 100;
+var y1 = 100;
+var x2 = 200;
+var y2 = 200;
+var sqMove = 5;
+var x2move = 4;
+var y2move = 6;
+var inputX = -100;
+var inputY = -100;
+var diameter = 25;
+
+function setup()
+  {
+  createCanvas(800,600);
+  }
+function draw()
+  {
+  background(0);
+  fill(255, 255, 255);
+  square(700, 500, 100);
+  fill(24,200,29);
+  circle(x,y,diameter);
+  //movement and boundaries
+  if (x >= 800) 
+  {
+  x = 800;
+  }
+  else if(x <= 0)
+  {
+    x=0;
+  }
+  if (keyIsDown(83)) 
+  {
+    y += 10;
+  } 
+  else if (keyIsDown(87)) 
+  {
+    y -= 10;
+  }
+  if (keyIsDown(68)) 
+  {
+    x += 10;
+  } 
+  else if (keyIsDown(65)) 
+  {
+    x -= 10;
+  }
+
+  if (y >= 600) 
+  {
+    y = 600;
+  }
+  else if (y <= 0)
+  {
+    y = 0;
+  }
+  //obsticles
+  fill(40, 60, 150);
+  square(x1,y1,30);
+  if(x1 >= 800 || x1 <= 0){
+    sqMove *= -1;
+  }
+  x1 += sqMove;
+    
+  fill(120, 50, 75);
+  triangle(x2, y2, x2 + 45, y2, x2 + 30, y2 + 30);
+  
+  if(x2 >= 800 || x2 <= 0)
+    {
+    x2move *= -1;
+    }
+  x2 += x2move;
+  if(y2 >= 600 || y2 <= 0){
+     y2move *= -1;
+     }
+    y2 += y2move;
+    ellipse(inputX, inputY, 30);
+    textSize(50);
+    
+    if (x >= 700 & y >= 500){
+      fill(0,0,0);
+      text('END',700, 580);
+    }
+  }
+  
+  function mousePressed() {
+    inputX = mouseX;
+    inputY = mouseY;
+  }
+    

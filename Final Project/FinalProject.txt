@@ -1,0 +1,145 @@
+//currently only wave 1 works
+// this wave is scalable to your hearts content
+var wave1 = [1,1, 1, 1, 0];
+var wave2 = [1,0];
+var waves = [];
+var index = 0;
+var enemyY = 0;
+var enemySpeed = 1;
+var line1 = [];
+var lines = [line1];
+var playerSize = 10;
+var playerSpeed = 4;
+var x = 200;
+var y = 360;
+var a = 65;
+var d = 68;
+//currently, bullets do not work
+let bullets= [];
+var bulletSpeed = 3;
+var bulletCount = 0;
+var waveNum = 1;
+function setup() {
+  createCanvas(400, 400);
+  waves = [wave1, wave2];
+}
+
+function draw() {
+  background(220);
+  
+  
+  if(enemyY >= 400) {
+    waveNum += 1;
+  }
+  if(waveNum == 1) {
+    waveCreate(wave1);
+  }
+  //cannot get win condition to work
+  else if(waveNum == 2) {
+    waveCreate(wave2);
+    text('You win!', 40, 40);
+  }
+  moveEnemy();
+  character(x,y);
+  moveChar();
+  
+  createBullet();
+  
+  
+  //shoot(x, y);
+  
+}
+
+function waveCreate(wave) {
+  //let wave = waves[index].length;
+  //console.log(wave);
+  for(var i = 0; i < wave.length; i++) {
+    if(wave[i] == 0) {
+      index++; //this does nothing at this point, but was meant to be a wave end signal
+  }
+    else if(wave[i] == 1) {
+      for(var n = 0; n < 5; n++) {
+        createEnemy1(n, i);
+      }
+    }
+  }
+  
+}
+//creates the first type of enemy
+function createEnemy1(enemy, line) {
+  fill ('green');
+  square(80 + (enemy * 50), enemyY + line * 50, 20);
+}
+//moves the enemies
+function moveEnemy() {
+  
+  enemyY += enemySpeed;
+  
+  
+  
+
+}
+//draws the character
+function character(playerX, playerY){
+  fill('rgb(177,228,177)');
+  ellipse(playerX, playerY, playerSize);
+}
+//movement handler
+function moveChar(){
+  if (x >= 400 - (playerSize/2)) 
+  {
+    x = 400 - (playerSize/2);
+  }
+  else if (x <= (playerSize/2)) {
+    x = (playerSize/2);
+  }
+
+
+  if (keyIsDown(d)) 
+  {
+    x += playerSpeed;
+  } 
+  else if (keyIsDown(a)) 
+  {
+    x -= playerSpeed;
+  }
+}
+/*function shoot(playerX,playerY) {
+  if (keyIsDown(49)) {
+    bulletX = playerX;
+    bulletY = playerY;
+    bulletY -= bulletSpeed;
+  }
+} */
+function keyPressed() {
+  if( key == 'q') {
+    bullets.push(new Bullet(x,y));
+    console.log(x , ' ', y);
+    
+  }
+  
+}
+function createBullet() {
+  
+  for(var m = 0; m < bullets.length; m++) {
+    let b = bullets[m];
+    b.update();
+    b.display();
+  }
+  //none of this functions
+}
+class Bullet {
+  constructor(newX,newY) {
+    this.pos = createVector(newX, newY);
+    this.vel = createVector(newX, newY += bulletSpeed);
+  }
+   update() {
+    this.pos.add(this.vel);
+  }
+
+  display() {
+    fill('black');
+    circle(this.pos.newX, this.pos.newY, 30);
+  }
+  
+}

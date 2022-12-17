@@ -1,0 +1,133 @@
+var x = 20;
+var y = 20;
+var s = 83;
+var w = 87;
+var a = 65;
+var d = 68;
+var inputX = -100;
+var inputY = -100;
+var objX = [];
+var objY = [];
+var objSize = [];
+var objRed = [];
+var objBlue = [];
+var objGreen = [];
+var playerSize = 20;
+var lengthX = 400;
+var lengthY = 400;
+var endBoxSize = 50;
+var win;
+function setup() {
+  createCanvas(lengthX, lengthY);
+  var xObj = 60;
+  var yObj = 40;
+  var sizeObj = 10;
+  var redObj = 12;
+  var blueObj = 50;
+  var greenObj = 200;
+  for(var i = 0; i < 5; i++) {
+    objX[i] = xObj;
+    objY[i] = yObj;
+    objSize[i] = sizeObj;
+    objRed[i] = redObj;
+    objBlue[i] = blueObj;
+    objGreen[i] = greenObj;
+    xObj += 50;
+    yObj += 50;
+    sizeObj += 10;
+    redObj += 30;
+    blueObj += 12;
+    greenObj -= 20;
+    
+  }
+}
+
+function draw() {
+  background(220);
+  //object drawn
+  for(var i = 0; i < objX.length; i++){
+    fill(objRed[i],objBlue[i],objGreen[i]);
+    square(objX[i],objY[i],objSize[i]);
+    
+    
+    
+  }
+  endBox();
+  character(x,y);
+  moveChar();
+  winCon();
+  objectOnPress();
+  //object movement
+  for(var n = 0; n < objX.length; n++) {
+    objY[n] = objY[n] + 1+ n;
+    if (objY[n] >= lengthY) {
+      objY[n] = 0;
+    }
+  }
+  
+  
+  
+}
+function character(playerX, playerY){
+  fill('rgb(177,228,177)');
+  ellipse(playerX, playerY, playerSize);
+}
+
+function moveChar(){
+  if (x >= lengthX) 
+  {
+    x = lengthX;
+  }
+  else if (x <= 0) {
+    x = 0;
+  }
+
+  if (y >= lengthY ) 
+  {
+    y = lengthY;
+  }
+  else if(y <= 0) {
+    y = 0;
+  }
+
+  if (keyIsDown(s)) 
+  {
+    y += 8;
+  } 
+  else if (keyIsDown(w)) 
+  {
+    y -= 8;
+  }
+
+  if (keyIsDown(d)) 
+  {
+    x += 8;
+  } 
+  else if (keyIsDown(a)) 
+  {
+    x -= 8;
+  }
+}
+function endBox(){
+  fill('white');
+  square(lengthX-endBoxSize, lengthY-endBoxSize, endBoxSize);
+}
+function winCon() {
+  if(x >= lengthX-endBoxSize & y >= lengthY-endBoxSize) {
+    win = true;
+  }
+  if(win) {
+    fill('black');
+    textSize(endBoxSize);
+    text('WIN', lengthX/2, lengthY/2);
+  }
+}
+function objectOnPress(){
+  fill('rgb(102,102,202)');
+  square(inputX,inputY, 30);
+}
+  function mousePressed(){
+    inputX = mouseX;
+    
+    inputY = mouseY;
+}

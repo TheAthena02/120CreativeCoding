@@ -1,0 +1,150 @@
+var x = 50;
+var y = 50;
+var s = 83;
+var w = 87;
+var a = 65;
+var d = 68;
+var inputX = -100;
+var inputY = -100;
+var obj1x = 10;
+var obj1y = 100;
+var obj2x = 10;
+var obj2y = 300;
+var speed1x = 5;
+var speed1y = 0;
+var speed2x = 4;
+var speed2y = 3;
+var lengthX = 800;
+var lengthY = 600;
+var obj1size = 30;
+var obj2size = 40;
+var playerSize = 30;
+var border = 10;
+var endBoxSize = 150;
+var win;
+function setup() {
+  createCanvas(lengthX,lengthY);
+  win = false;
+  
+}
+
+function draw() {
+  background(220);
+  edges();
+  endBox();
+  
+  character(x,y);
+  moveChar();
+  objectOnPress();
+  obstacles(obj1x + border,obj1y, obj1size, 'red');
+  obstacles(obj2x + border,obj2y, obj2size, 'blue');
+  moveObj1();
+  moveObj2();
+  winCon();
+  
+  
+}
+
+
+
+function character(playerX, playerY){
+  fill('rgb(177,228,177)');
+  ellipse(playerX, playerY, playerSize);
+}
+function moveChar(){
+  if (x >= lengthX - border - (playerSize/2)) 
+  {
+    x = lengthX - border- (playerSize/2);
+  }
+  else if (x <= border + (playerSize/2)) {
+    x = border+ (playerSize/2);
+  }
+
+  if (y >= lengthY - border- (playerSize/2)) 
+  {
+    y = lengthY - border- (playerSize/2);
+  }
+  else if(y <= border+ (playerSize/2)) {
+    y = border+ (playerSize/2);
+  }
+
+  if (keyIsDown(s)) 
+  {
+    y += 8;
+  } 
+  else if (keyIsDown(w)) 
+  {
+    y -= 8;
+  }
+
+  if (keyIsDown(d)) 
+  {
+    x += 8;
+  } 
+  else if (keyIsDown(a)) 
+  {
+    x -= 8;
+  }
+}
+
+function objectOnPress(){
+  fill('rgb(102,102,202)');
+  square(inputX,inputY, 30);
+}
+  function mousePressed(){
+    inputX = mouseX;
+    
+    inputY = mouseY;
+}
+
+function obstacles(startX,startY,size,color){
+  fill(color);
+  square(startX,startY,size);
+}
+
+function moveObj1() {
+  obj1x += speed1x;
+  if(obj1x >= (lengthX - border -obj1size) || obj1x <= border){
+    speed1x *= -1;
+  }
+  obj1y += speed1y;
+  if(obj1y >= (lengthY - border -obj1size) || obj1y <= border){
+    speed1y *= -1;
+  }
+}
+function moveObj2() {
+  obj2x += speed2x;
+  if(obj2x >= (lengthX - border -obj2size) || obj2x <= border){
+    speed2x *= -1;
+  }
+  obj2y += speed2y;
+  if(obj2y >= (lengthY - border -obj2size) || obj2y <= border){
+    speed2y *= -1;
+  }
+}
+
+function edges() {
+  fill('black');
+  //top
+  rect(0,0,lengthX,border);
+  //right
+  rect(lengthX - border,0,border,lengthY);
+  //left
+  rect(0,0,border,lengthY);
+  //bottom
+  rect(0,lengthY-border,lengthX,border);
+}
+function endBox(){
+  fill('white');
+  square(lengthX-endBoxSize, lengthY-endBoxSize, endBoxSize);
+}
+function winCon() {
+  if(x >= lengthX-endBoxSize & y >= lengthY-endBoxSize) {
+    win = true;
+  }
+  if(win) {
+    fill('black');
+    textSize(100);
+    text('WIN', lengthX/2, lengthY/2);
+  }
+}
